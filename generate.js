@@ -1,8 +1,5 @@
 const faker = require('faker');
-const mongoose = require('mongoose');
-const db = require('./models/');
-// const Amenity = db.Amenity;
-const Room = db.Room;
+const fs = require('fs');
 
 const PROPERTY_TYPE = [
   'Apartment',
@@ -18,84 +15,137 @@ const PROPERTY_TYPE = [
 const BED_TYPE = ['single', 'queen', 'double', 'king'];
 
 const AMENITY_DATA = [
-  { amenityType: 'Basic', name: 'Air conditioning', icon: '', explanation: '' },
   {
+    amenityId: 1,
+    amenityType: 'Basic',
+    name: 'Air conditioning',
+    icon: '',
+    explanation: '',
+  },
+
+  {
+    amenityId: 2,
     amenityType: 'Basic',
     name: 'Private entrance',
     icon: '',
-    explanation: 'Separate street or building entrance'
+    explanation: 'Separate street or building entrance',
   },
 
   {
+    amenityId: 3,
     amenityType: 'Basic',
     name: 'Heating',
     icon: '',
-    explanation: 'Central heating or a heater in the listing'
+    explanation: 'Central heating or a heater in the listing',
   },
 
-  { amenityType: 'Dining', name: 'Breakfast', icon: '', explanation: '' },
+  { amenityId: 4,
+    amenityType: 'Dining',
+    name: 'Breakfast',
+    icon: '',
+    explanation: '',
+  },
 
   {
+    amenityId: 5,
     amenityType: 'Bed and bath',
     name: 'Hair dryer',
     icon: '',
-    explanation: ''
+    explanation: '',
   },
-  { amenityType: 'Bed and bath', name: 'Shampoo', icon: '', explanation: '' },
-  { amenityType: 'Bed and bath', name: 'Hangers', icon: '', explanation: '' },
+
+  { amenityId: 6,
+    amenityType: 'Bed and bath',
+    name: 'Shampoo',
+    icon: '',
+    explanation: '',
+  },
+
+  { amenityId: 7,
+    amenityType: 'Bed and bath',
+    name: 'Hangers',
+    icon: '',
+    explanation: '',
+  },
+
   {
+    amenityId: 8,
     amenityType: 'Bed and bath',
     name: 'Bed linens',
     icon: '',
-    explanation: ''
+    explanation: '',
   },
-  { amenityType: 'Bed and bath', name: 'Washer', icon: '', explanation: '' },
+
+  { amenityId: 9,
+    amenityType: 'Bed and bath',
+    name: 'Washer',
+    icon: '',
+    explanation: '',
+  },
+  
   {
+    amenityId: 10,
     amenityType: 'Safety features',
     name: 'Smoke detector',
     icon: '',
-    explanation: ''
+    explanation: '',
   },
+
   {
+    amenityId: 11,
     amenityType: 'Safety features',
     name: 'Carbon monoxide detector',
     icon: '',
-    explanation: ''
+    explanation: '',
   }
 ];
 
 const defaultAmenities = [
-  { amenityType: 'Basic', name: 'Wifi', icon: 'fa fa-wifi', explanation: '' },
+  { amenityId: 12,
+    amenityType: 'Basic',
+    name: 'Wifi',
+    icon: 'fa fa-wifi',
+    explanation: '',
+  },
+
   {
+    amenityId: 13,
     amenityType: 'Basic',
     name: 'TV',
     icon: 'fa fa-television',
-    explanation: ''
+    explanation: '',
   },
+
   {
+    amenityId: 14,
     amenityType: 'Basic',
     name: 'Hot water',
     icon: 'fa fa-shower',
-    explanation: ''
+    explanation: '',
   },
+
   {
+    amenityId: 15,
     amenityType: 'Dining',
     name: 'Kitchen',
     icon: 'fa fa-cutlery',
-    explanation: 'Space where guests can cook their own meals'
+    explanation: 'Space where guests can cook their own meals',
   },
+
   {
+    amenityId: 16,
     amenityType: 'Facilities',
     name: 'Free parking on premises',
     icon: 'fa fa-car',
-    explanation: ''
+    explanation: '',
   },
+
   {
+    amenityId: 17,
     amenityType: 'Basic',
     name: 'Laptop friendly workspace',
     icon: 'fa fa-laptop',
-    explanation:
-      'A table or desk with space for a laptop and a chair that’s comfortable to work in'
+    explanation: 'A table or desk with space for a laptop and a chair',
   }
 ];
 
@@ -110,54 +160,64 @@ const populateRandomAmenities = num => {
   return newAmenity;
 };
 
-const createRoom = () => {
-  const data = [];
-  for (let room = 1; room <= 100; room++) {
-    // average length for a sentence
-    const sentenceLength = faker.random.number({ min: 4, max: 10 });
+const createAmenityCsv = () => {
+  let combinedAmenities = AMENITY_DATA.concat(defaultAmenities);
+  let csvFormatAmenities = combinedAmenities.map((amenity) => {
+    let amenitiesInfo = [amenity.amenityId, amenity.amenityType, amenity.name, amenity.icon, amenity.explanation];
+    return amenitiesInfo.join();
+  })
+  for (let i = 0; i < csvFormatAmenities.length; i++) {
+    console.log(csvFormatAmenities[i]);
+  }
+}
 
-    const noOfRules = faker.random.number({ min: 4, max: 10 });
+// createAmenityCsv();
+
+const createRooms = () => {
+  const data = [];
+  for (let i = 1; i <= 500000; i++) {
+    const sentenceLength = faker.random.number({ min: 2, max: 4 });
+
+    const noOfRules = faker.random.number({ min: 2, max: 4 });
     const rules = [];
     for (let j = 0; j < noOfRules; j++) {
-      rules.push(faker.lorem.words(faker.random.number({ min: 2, max: 4 })));
+      rules.push(faker.lorem.words(faker.random.number({ min: 1, max: 2 })));
     }
 
-    const cancellationsLength = faker.random.number({ min: 4, max: 8 });
+    const cancellationsLength = faker.random.number({ min: 2, max: 4 });
     const cancelationRules = [];
     for (let j = 0; j < cancellationsLength; j++) {
       cancelationRules.push(
-        faker.lorem.words(faker.random.number({ min: 6, max: 10 }))
+        faker.lorem.words(faker.random.number({ min: 3, max: 5 }))
       );
     }
 
     const dataItem = {};
-    dataItem.room_id = room;
+    dataItem.room_id = i;
+    dataItem.roomName= `room${i.toString()}`;
     dataItem.city = faker.address.city();
     dataItem.type =
       PROPERTY_TYPE[Math.floor(Math.random() * PROPERTY_TYPE.length)];
-    dataItem.title = faker.lorem.words(faker.random.number({ min: 4, max: 8 }));
-    dataItem.max_guest = faker.random.number({ min: 2, max: 8 });
-    dataItem.subtype = faker.random.number({ min: 2, max: 8 });
-    dataItem.beds = faker.random.number({ min: 2, max: 8 });
-    dataItem.baths = faker.random.number({ min: 1, max: 4 });
+    dataItem.title = faker.lorem.words(faker.random.number({ min: 2, max: 4 }));
+    dataItem.max_guest = faker.random.number({ min: 1, max: 4 });
+    dataItem.subtype = faker.random.number({ min: 1, max: 4 });
+    dataItem.beds = faker.random.number({ min: 1, max: 4 });
+    dataItem.baths = faker.random.number({ min: 1, max: 2 });
     dataItem.host_username = faker.name.findName();
     dataItem.avatar = faker.image.avatar();
     dataItem.highlights = [
-      faker.lorem.words(faker.random.number({ min: 2, max: 4 })),
-      faker.lorem.sentences(faker.random.number({ min: 4, max: 8 }))
+      faker.lorem.words(faker.random.number({ min: 1, max: 2 })),
+      faker.lorem.sentences(faker.random.number({ min: 2, max: 4 }))
     ];
     dataItem.short_description = faker.lorem.sentences(
-      faker.random.number({ min: 2, max: 4 })
+      faker.random.number({ min: 1, max: 2 })
     );
     dataItem.main_description = faker.lorem.sentences(
-      faker.random.number({ min: 4, max: 10 })
+      faker.random.number({ min: 2, max: 5 })
     );
-    (dataItem.amenities = populateRandomAmenities(
-      faker.random.number({ min: 6, max: 10 })
-    )),
-      (dataItem.house_rules = rules);
+    dataItem.house_rules = rules;
     dataItem.house_rules_description = faker.lorem.sentences(
-      faker.random.number({ min: 4, max: 8 })
+      faker.random.number({ min: 2, max: 4 })
     );
     dataItem.cancellations = cancelationRules;
     dataItem.sleeping_arrangements = [];
@@ -174,29 +234,14 @@ const createRoom = () => {
       dataItem.sleeping_arrangements.push(bedDetails);
     }
 
-    const newRoom = new Room(dataItem);
-    const temp = newRoom.save();
-    data.push(temp);
+    let dataCategories = [dataItem.room_id, dataItem.roomName, dataItem.city, dataItem.type, dataItem.title, dataItem.max_guest, dataItem.subtype, dataItem.beds, dataItem.baths, dataItem.host_username, dataItem.avatar, JSON.stringify(dataItem.highlights).replace(new RegExp(',', 'g'), '*'), dataItem.short_description, dataItem.main_description, dataItem.amenities, JSON.stringify(dataItem.house_rules).replace(new RegExp(',', 'g'), '*'), dataItem.house_rules_description, JSON.stringify(dataItem.cancellations).replace(new RegExp(',', 'g'), '*'), JSON.stringify(dataItem.sleeping_arrangements).replace(new RegExp(',', 'g'), '*')];
+    let csvFormatData = dataCategories.join();
+    console.log(csvFormatData)
   }
+  return data;
 
-  Promise.all(data)
-    .then(results => {
-      console.log(`${results.length} data saved in dB!`);
-    })
-    .catch(err => {
-      console.error(err);
-    })
-    .then(() => {
-      mongoose.connection.close(() => {
-        process.exit(0);
-      });
-    });
 };
 
-db.Room.remove({}).exec(function(err, results) {
-  if (err) {
-    console.error(err);
-    return process.exit(0);
-  }
-  createRoom();
-});
+  let rooms = createRooms();
+  // console.log(rooms)
+
