@@ -162,12 +162,12 @@ const populateRandomAmenities = num => {
 
 const createAmenityCsv = () => {
   let combinedAmenities = AMENITY_DATA.concat(defaultAmenities);
-  let amenitiesCsvArr = combinedAmenities.map((amenity) => {
+  let csvFormatAmenities = combinedAmenities.map((amenity) => {
     let amenitiesInfo = [amenity.amenityId, amenity.amenityType, amenity.name, amenity.icon, amenity.explanation];
     return amenitiesInfo.join();
   })
-  for (let i = 0; i < amenitiesCsvArr.length; i++) {
-    console.log(amenitiesCsvArr[i]);
+  for (let i = 0; i < csvFormatAmenities.length; i++) {
+    console.log(csvFormatAmenities[i]);
   }
 }
 
