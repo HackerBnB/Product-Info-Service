@@ -16,7 +16,7 @@ const BED_TYPE = ['single', 'queen', 'double', 'king'];
 
 const AMENITY_DATA = [
   {
-    amenityId: 1,
+    amenity_id: 1,
     amenityType: 'Basic',
     name: 'Air conditioning',
     icon: '',
@@ -24,7 +24,7 @@ const AMENITY_DATA = [
   },
 
   {
-    amenityId: 2,
+    amenity_id: 2,
     amenityType: 'Basic',
     name: 'Private entrance',
     icon: '',
@@ -32,14 +32,14 @@ const AMENITY_DATA = [
   },
 
   {
-    amenityId: 3,
+    amenity_id: 3,
     amenityType: 'Basic',
     name: 'Heating',
     icon: '',
     explanation: 'Central heating or a heater in the listing',
   },
 
-  { amenityId: 4,
+  { amenity_id: 4,
     amenityType: 'Dining',
     name: 'Breakfast',
     icon: '',
@@ -47,21 +47,21 @@ const AMENITY_DATA = [
   },
 
   {
-    amenityId: 5,
+    amenity_id: 5,
     amenityType: 'Bed and bath',
     name: 'Hair dryer',
     icon: '',
     explanation: '',
   },
 
-  { amenityId: 6,
+  { amenity_id: 6,
     amenityType: 'Bed and bath',
     name: 'Shampoo',
     icon: '',
     explanation: '',
   },
 
-  { amenityId: 7,
+  { amenity_id: 7,
     amenityType: 'Bed and bath',
     name: 'Hangers',
     icon: '',
@@ -69,14 +69,14 @@ const AMENITY_DATA = [
   },
 
   {
-    amenityId: 8,
+    amenity_id: 8,
     amenityType: 'Bed and bath',
     name: 'Bed linens',
     icon: '',
     explanation: '',
   },
 
-  { amenityId: 9,
+  { amenity_id: 9,
     amenityType: 'Bed and bath',
     name: 'Washer',
     icon: '',
@@ -84,7 +84,7 @@ const AMENITY_DATA = [
   },
   
   {
-    amenityId: 10,
+    amenity_id: 10,
     amenityType: 'Safety features',
     name: 'Smoke detector',
     icon: '',
@@ -92,7 +92,7 @@ const AMENITY_DATA = [
   },
 
   {
-    amenityId: 11,
+    amenity_id: 11,
     amenityType: 'Safety features',
     name: 'Carbon monoxide detector',
     icon: '',
@@ -101,7 +101,7 @@ const AMENITY_DATA = [
 ];
 
 const defaultAmenities = [
-  { amenityId: 12,
+  { amenity_id: 12,
     amenityType: 'Basic',
     name: 'Wifi',
     icon: 'fa fa-wifi',
@@ -109,7 +109,7 @@ const defaultAmenities = [
   },
 
   {
-    amenityId: 13,
+    amenity_id: 13,
     amenityType: 'Basic',
     name: 'TV',
     icon: 'fa fa-television',
@@ -117,7 +117,7 @@ const defaultAmenities = [
   },
 
   {
-    amenityId: 14,
+    amenity_id: 14,
     amenityType: 'Basic',
     name: 'Hot water',
     icon: 'fa fa-shower',
@@ -125,7 +125,7 @@ const defaultAmenities = [
   },
 
   {
-    amenityId: 15,
+    amenity_id: 15,
     amenityType: 'Dining',
     name: 'Kitchen',
     icon: 'fa fa-cutlery',
@@ -133,7 +133,7 @@ const defaultAmenities = [
   },
 
   {
-    amenityId: 16,
+    amenity_id: 16,
     amenityType: 'Facilities',
     name: 'Free parking on premises',
     icon: 'fa fa-car',
@@ -141,7 +141,7 @@ const defaultAmenities = [
   },
 
   {
-    amenityId: 17,
+    amenity_id: 17,
     amenityType: 'Basic',
     name: 'Laptop friendly workspace',
     icon: 'fa fa-laptop',
@@ -161,21 +161,20 @@ const populateRandomAmenities = num => {
 };
 
 const createAmenityCsv = () => {
-  let combinedAmenities = AMENITY_DATA.concat(defaultAmenities);
-  let csvFormatAmenities = combinedAmenities.map((amenity) => {
-    let amenitiesInfo = [amenity.amenityId, amenity.amenityType, amenity.name, amenity.icon, amenity.explanation];
-    return amenitiesInfo.join();
-  })
-  for (let i = 0; i < csvFormatAmenities.length; i++) {
-    console.log(csvFormatAmenities[i]);
+  for (let i = 1; i <= 10000000; i++) {
+    let randomAmenities = populateRandomAmenities(faker.random.number({ min: 2, max: 6 }));
+    for (let x = 0; x < randomAmenities.length; x++) {
+      let amenity = randomAmenities[x];
+      console.log(`${i},${amenity.amenity_id},${amenity.amenityType},${amenity.name},${amenity.icon},${amenity.explanation}`);
+    }
   }
 }
 
-// createAmenityCsv();
+createAmenityCsv();
 
 const createRooms = () => {
   const data = [];
-  for (let i = 1; i <= 500000; i++) {
+  for (let i = 1; i <= 10000000; i++) {
     const sentenceLength = faker.random.number({ min: 2, max: 4 });
 
     const noOfRules = faker.random.number({ min: 2, max: 4 });
@@ -234,7 +233,7 @@ const createRooms = () => {
       dataItem.sleeping_arrangements.push(bedDetails);
     }
 
-    let dataCategories = [dataItem.room_id, dataItem.roomName, dataItem.city, dataItem.type, dataItem.title, dataItem.max_guest, dataItem.subtype, dataItem.beds, dataItem.baths, dataItem.host_username, dataItem.avatar, JSON.stringify(dataItem.highlights).replace(new RegExp(',', 'g'), '*'), dataItem.short_description, dataItem.main_description, dataItem.amenities, JSON.stringify(dataItem.house_rules).replace(new RegExp(',', 'g'), '*'), dataItem.house_rules_description, JSON.stringify(dataItem.cancellations).replace(new RegExp(',', 'g'), '*'), JSON.stringify(dataItem.sleeping_arrangements).replace(new RegExp(',', 'g'), '*')];
+    let dataCategories = [dataItem.room_id, dataItem.roomName, dataItem.city, dataItem.type, dataItem.title, dataItem.max_guest, dataItem.subtype, dataItem.beds, dataItem.baths, dataItem.host_username, dataItem.avatar, JSON.stringify(dataItem.highlights).replace(new RegExp(',', 'g'), '*'), dataItem.short_description, dataItem.main_description, JSON.stringify(dataItem.house_rules).replace(new RegExp(',', 'g'), '*'), dataItem.house_rules_description, JSON.stringify(dataItem.cancellations).replace(new RegExp(',', 'g'), '*'), JSON.stringify(dataItem.sleeping_arrangements).replace(new RegExp(',', 'g'), '*')];
     let csvFormatData = dataCategories.join();
     console.log(csvFormatData)
   }
@@ -243,5 +242,3 @@ const createRooms = () => {
 };
 
   let rooms = createRooms();
-  // console.log(rooms)
-
