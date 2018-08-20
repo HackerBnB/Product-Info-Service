@@ -1,10 +1,4 @@
-// const db = require("../models");
-// const Room = require("../models/Room.js");
 const models = require("../models/PostgresModel");
-
-
-
-
 
 // Create:
 const postRoomInfo = (data, callback) => {
@@ -68,9 +62,16 @@ const getRoom = (roomId, callback) => {
 }
 
 // Update:
-// const updateRoomInfo = (roomId, updatedBody, callback) => {
-//   Room.update({ room_id: roomId }, { $set: updatedBody}, callback);
-// };
+const updateRoomInfo = (roomId, updatedBody, callback) => {
+  let query = `UPDATE rooms SET ${updatedBody.column} = '${updatedBody.value}' WHERE rooms.room_id = '${roomId}'`;
+  models.pool.query(query, (error, result) => {
+    if (error) {
+      callback('Error in updating data: ', error)
+    } else {
+      callback(null, result);
+    }
+  })
+};
 
 // //Delete:
 const deleteRoomInfo = (roomId, callback) => {
@@ -95,6 +96,6 @@ module.exports = {
   getRoom,
   postRoomInfo,
   postAmenity,
-  // updateRoomInfo,
+  updateRoomInfo,
   deleteRoomInfo,
 };

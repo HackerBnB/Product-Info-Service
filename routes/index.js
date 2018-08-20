@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 
 const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
-// router.get('/', ctrl.main.home);
 
 router.use(bodyParser.json()); 
 
@@ -43,15 +42,15 @@ router.get('/rooms/:id/roomInfo', (req, res) => {
 
 
 //Update
-// router.put('/rooms/:id/roomInfo', (req, res) => {
-//   ctrl.updateRoomInfo(req.params.id, req.body, (err) => {
-//     if (err) {
-//       res.status(404).send(err);
-//     } else {
-//       res.send('Room info was successfully updated');
-//     }
-//   });
-// });
+router.patch('/rooms/:id/roomInfo', (req, res) => {
+  ctrl.updateRoomInfo(req.params.id, req.body, (err) => {
+    if (err) {
+      res.status(404).send(err);
+    } else {
+      res.send('Room info was successfully updated');
+    }
+  });
+});
 
 //Delete
 router.delete('/rooms/:id/roomInfo', (req, res) => {
