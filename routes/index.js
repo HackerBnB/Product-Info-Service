@@ -54,14 +54,14 @@ router.get('/rooms/:id/roomInfo', (req, res) => {
 // });
 
 //Delete
-// router.delete('/rooms/:id/roomInfo', (req, res) => {
-//   ctrl.deleteRoomInfo(req.params.id, (err, data) => {
-//     if (err) {
-//       res.status(404).send(err);
-//     } else {
-//       res.send('Room info was successfully deleted');
-//     }
-//   });
-// });
+router.delete('/rooms/:id/roomInfo', (req, res) => {
+  ctrl.deleteRoomInfo(req.params.id, (err, data) => {
+    if (err) {
+      res.status(404).send(err);
+    } else {
+      res.send('Room info was successfully deleted');
+    }
+  });
+});
 
 module.exports = router;
