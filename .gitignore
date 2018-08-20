@@ -26,3 +26,12 @@ dist/
 
 # AWS
 aws-keys.json
+
+# data
+dataStorage
+
+#newRelic
+newrelic.js
+
+#cassandra
+cassandraFiles
