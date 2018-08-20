@@ -20,6 +20,16 @@ router.post('/rooms/:id/roomInfo', (req, res) => {
   });
 });
 
+router.post('/rooms/:id/amenity', (req, res) => {
+  ctrl.postAmenity(req.body, (err, data) => {
+    if (err) {
+      res.status(422).send(err);
+    } else {
+      res.send('Amenity was successfully added to DB');
+    }
+  });
+});
+
 //Read
 router.get('/rooms/:id/roomInfo', (req, res) => {
   ctrl.getRoom(req.params.id, (err, data) => {
@@ -33,25 +43,25 @@ router.get('/rooms/:id/roomInfo', (req, res) => {
 
 
 //Update
-router.put('/rooms/:id/roomInfo', (req, res) => {
-  ctrl.updateRoomInfo(req.params.id, req.body, (err) => {
-    if (err) {
-      res.status(404).send(err);
-    } else {
-      res.send('Room info was successfully updated');
-    }
-  });
-});
+// router.put('/rooms/:id/roomInfo', (req, res) => {
+//   ctrl.updateRoomInfo(req.params.id, req.body, (err) => {
+//     if (err) {
+//       res.status(404).send(err);
+//     } else {
+//       res.send('Room info was successfully updated');
+//     }
+//   });
+// });
 
 //Delete
-router.delete('/rooms/:id/roomInfo', (req, res) => {
-  ctrl.deleteRoomInfo(req.params.id, (err, data) => {
-    if (err) {
-      res.status(404).send(err);
-    } else {
-      res.send('Room info was successfully deleted');
-    }
-  });
-});
+// router.delete('/rooms/:id/roomInfo', (req, res) => {
+//   ctrl.deleteRoomInfo(req.params.id, (err, data) => {
+//     if (err) {
+//       res.status(404).send(err);
+//     } else {
+//       res.send('Room info was successfully deleted');
+//     }
+//   });
+// });
 
 module.exports = router;
