@@ -9,8 +9,7 @@
  */
 
 module.exports = {
-  extends: ['airbnb', 'prettier', 'prettier/react'],
-  plugins: ['prettier'],
+  extends: ['airbnb-base'],
   env: {
     jest: true
   }

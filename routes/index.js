@@ -1,16 +1,16 @@
 const express = require('express');
-const ctrl = require('./../controllers');
-const router = express.Router();
 const bodyParser = require('body-parser');
+const ctrl = require('./../controllers');
 
+const router = express.Router();
 const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-router.use(bodyParser.json()); 
+router.use(bodyParser.json());
 
-//Create
+// Create
 router.post('/rooms/:id/roomInfo', (req, res) => {
-  ctrl.postRoomInfo(req.body, (err, data) => {
+  ctrl.postRoomInfo(req.body, (err) => {
     if (err) {
       res.status(422).send(err);
     } else {
@@ -20,7 +20,7 @@ router.post('/rooms/:id/roomInfo', (req, res) => {
 });
 
 router.post('/rooms/:id/amenity', (req, res) => {
-  ctrl.postAmenity(req.body, (err, data) => {
+  ctrl.postAmenity(req.body, (err) => {
     if (err) {
       res.status(422).send(err);
     } else {
@@ -29,7 +29,7 @@ router.post('/rooms/:id/amenity', (req, res) => {
   });
 });
 
-//Read
+// Read
 router.get('/rooms/:id/roomInfo', (req, res) => {
   ctrl.getRoom(req.params.id, (err, data) => {
     if (err) {
@@ -41,7 +41,7 @@ router.get('/rooms/:id/roomInfo', (req, res) => {
 });
 
 
-//Update
+// Update
 router.patch('/rooms/:id/roomInfo', (req, res) => {
   ctrl.updateRoomInfo(req.params.id, req.body, (err) => {
     if (err) {
@@ -52,9 +52,9 @@ router.patch('/rooms/:id/roomInfo', (req, res) => {
   });
 });
 
-//Delete
+// Delete
 router.delete('/rooms/:id/roomInfo', (req, res) => {
-  ctrl.deleteRoomInfo(req.params.id, (err, data) => {
+  ctrl.deleteRoomInfo(req.params.id, (err) => {
     if (err) {
       res.status(404).send(err);
     } else {

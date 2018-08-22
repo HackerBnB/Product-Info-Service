@@ -1,23 +1,20 @@
 require('newrelic');
-const redis = require("redis");
-const client = redis.createClient();
-
 const express = require('express');
-const routes = require('./../routes');
 const path = require('path');
+const routes = require('./../routes');
 
 const app = express();
 
-app.set('port', process.env.PORT || 3003); //prod vs test environment switch
+app.set('port', process.env.PORT || 3003); // prod vs test environment switch
 
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
   res.redirect('/rooms/1');
 });
 
 app.use(express.static('public/'));
 app.use(express.static('client/dist'));
 
-app.get('/rooms/:id', function(req, res) {
+app.get('/rooms/:id', (req, res) => {
   const reactPath = path.join(__dirname, '../public/index.html');
   res.sendFile(reactPath);
 });
