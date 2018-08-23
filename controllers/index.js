@@ -23,7 +23,7 @@ const postAmenity = (data, callback) => {
   const queryAmenity = `INSERT into amenities (room_id, amenity_id, amenitytype, name, icon, explanation) VALUES ('${data.room_id}', '${data.amenity_id}', '${data.amenitytype}', '${data.name}', '${data.icon}', '${data.explanation}')`;
   models.pool.query(queryAmenity, (error, result) => {
     if (error) {
-      callback('Error in inserting amenity: ', error)
+      callback('Error in inserting amenity: ', error);
     } else {
       callback(null, result);
     }
@@ -67,20 +67,20 @@ const getRoom = (roomId, callback) => {
           dataWithFormattedAmenities.house_rules = JSON.parse("[\"" + dataWithFormattedAmenities.house_rules.replace(/\*/g ,"\",\"").slice(1,-1) + "\"]");
           dataWithFormattedAmenities.cancellations = JSON.parse("[\"" + dataWithFormattedAmenities.cancellations.replace(/\*/g ,"\",\"").slice(1,-1) + "\"]");
           dataWithFormattedAmenities.sleeping_arrangements = JSON.parse("[\"" + dataWithFormattedAmenities.sleeping_arrangements.replace(/\*/g ,"\",\"").slice(1,-1) + "\"]");
-          client.set(roomId, JSON.stringify(dataWithFormattedAmenities));
+          client.setex(roomId, 300, JSON.stringify(dataWithFormattedAmenities));
           callback(null, dataWithFormattedAmenities);
         }
-      })
+      });
     }
-  })
-}
+  });
+};
 
 // Update:
 const updateRoomInfo = (roomId, updatedBody, callback) => {
   const query = `UPDATE rooms SET ${updatedBody.column} = '${updatedBody.value}' WHERE rooms.room_id = '${roomId}'`;
   models.pool.query(query, (error, result) => {
     if (error) {
-      callback('Error in updating data: ', error)
+      callback('Error in updating data: ', error);
     } else {
       callback(null, result);
     }
