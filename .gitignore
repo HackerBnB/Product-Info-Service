@@ -36,3 +36,6 @@ newrelic_agent.log
 
 #cassandra
 cassandraFiles
+
+#postgress
+app-env
