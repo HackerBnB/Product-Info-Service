@@ -39,3 +39,5 @@ cassandraFiles
 
 #postgress
 app-env
+
+load.js
